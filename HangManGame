@@ -1,0 +1,133 @@
+# function to store Words
+
+
+
+import random
+
+print('HangMan')
+
+print('''     _____
+    |     |
+   \O/    |  
+    |     |
+   / \    |
+          |
+          |
+        ------''')
+
+
+def Word_list():
+    global chosen_word
+    words=['GAME','TALK','VAN','WALK','HIDE','SHOT','PLAY','DRINK','EAT','THING','WIELD','TALE','EDUCATION']
+    chosen_word=random.choice(words)
+    
+
+# this function will draw a body part of the "HANGMAN" for every incorrect answer. The maximum incorrect answers allowed is 6
+def HangMan_bodyPart():
+    if mistake_Counter==1:
+        print('''     _____
+    |     |
+    O     |  
+          |
+          |
+          |
+          |
+        ------''')
+    if mistake_Counter==2:
+        
+        print('''     _____
+    |     |
+   \O     |  
+          |
+          |
+          |
+          |
+        ------''')
+    if mistake_Counter==3:
+        
+        print('''     _____
+    |     |
+   \O/    |  
+          |
+          |
+          |
+          |
+        ------''')
+    if mistake_Counter==4:
+        print('''     _____
+    |     |
+   \O/    |  
+    |     |
+          |
+          |
+          |
+        ------''')
+    if mistake_Counter==5:
+        print('''     _____
+    |     |
+   \O/    |  
+    |     |
+   /      |
+          |
+          |
+        ------''') 
+    if mistake_Counter==6:     
+        print('''     _____
+    |     |
+   \O/    |  
+    |     |
+   / \    |
+          |
+          |
+        ------''')
+        print('game over')
+        print('answer is',chosen_word)
+        print('thank you for playing!, Better luck next time ^_^')
+        print('if you have any feedback regarding this game then please mail me at somyasati14@gmail.com')
+
+
+# in case of a word where there is repetition of letters, we may need to pop the letter after it is entered and is added to the prompt
+def playing_theGame():
+    global mistake_Counter
+    mistake_Counter=0
+    player=input('Enter your Name')
+    print('Welcome',player)
+    print("Let's play!")
+    prompt='_ '*len(chosen_word)
+    print(prompt)
+    prompt=prompt.split()
+    while True:
+        while True:
+            guess=input('Guess any letter [one at a time] ')
+            if len(guess)==1:
+                break
+                
+        if guess.upper() not in chosen_word:
+            mistake_Counter+=1
+            HangMan_bodyPart()
+        if mistake_Counter==6:
+            break
+        if guess.upper() in chosen_word:
+            
+            chosenWordCopy = chosen_word
+            
+            wordlist=list(map(str,chosen_word))
+            
+
+            word_pos=wordlist.index(guess.upper())
+            prompt[word_pos]=guess.upper()
+            final=" ".join(map(str,prompt))
+            print(final)
+            if prompt==wordlist:
+                print('congratulations!')
+                print('thank you for playing! ^_^')
+                print('if you have any feedback regarding this game then please mail me at somyasati14@gmail.com')
+                break
+
+
+while True:            
+    Word_list()
+    playing_theGame()
+    input('press enter to start a new game :)')
+    continue
+
