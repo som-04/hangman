@@ -1,2 +1,1 @@
-# projects
-some projects I built when I started out with programming in high school
+Something I built with a very limited knowledge of python when I started programming.
